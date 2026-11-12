@@ -33,7 +33,7 @@ numpy
 ## Installation
 
 ```bash
-git clone <your-repo-url>
+git clone <https://github.com/robertamitea1234/Air-Mouse>
 cd <your-repo-folder>
 pip install opencv-python mediapipe pyautogui numpy
 ```
