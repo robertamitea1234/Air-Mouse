@@ -76,4 +76,4 @@ All settings are at the top of `air_mouse.py`:
 
 - `pyautogui.FAILSAFE` is disabled, so moving the mouse to a screen corner will **not** abort the script. Use Esc in the preview window to exit.
 - Good, even lighting and a plain background improve hand detection.
-- The code comments are in Romanian.
+
