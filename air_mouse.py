@@ -6,7 +6,7 @@ import mediapipe as mp
 import pyautogui
 import numpy as np
 
-# ---------------- SETARI (le poti modifica) ----------------
+
 STILL_TIME = 3.0        # secunde nemiscat pana se blocheaza cursorul
 LOCK_TIME = 5.0         # secunde cat ramane blocat
 STILL_RADIUS = 40       # pixeli ecran: cat se poate misca si tot conteaza "nemiscat"
@@ -18,7 +18,7 @@ SWIPE_WINDOW = 1      # secunde: in cat timp trebuie facuta miscarea in jos
 SWIPE_MIN_DY = 0.25     # cat din inaltimea imaginii trebuie sa coboare mana (0.25 = 25%)
 SMOOTHING = 0.1        # 0..1, mai mic = cursor mai fin dar mai lent
 MARGIN = 100            # margine ignorata in camera (pixeli)
-# -----------------------------------------------------------
+
 
 cap = cv2.VideoCapture(0)
 mp_hands = mp.solutions.hands
@@ -85,14 +85,14 @@ while cap.isOpened():
             is_fist = not any(extended)
             is_open_palm = all(extended)
 
-            # ---------- Pumn -> SPACE (o data per pumn) ----------
+            # Pumn -> SPACE (o data per pumn) 
             if is_fist and not was_fist and now - last_fist > FIST_COOLDOWN:
                 pyautogui.press("space")
                 last_fist = now
                 print("Pumn -> space")
             was_fist = is_fist
 
-            # ---------- Swipe in jos (palma deschisa) -> minimizeaza tot ----------
+            #Swipe in jos (palma deschisa) -> minimizeaza tot
             palm = lm[9]  # centrul palmei
             palm_history.append((now, palm.x, palm.y))
             while palm_history and now - palm_history[0][0] > SWIPE_WINDOW:
@@ -108,7 +108,7 @@ while cap.isOpened():
                     palm_history.clear()
                     print("Swipe in jos -> minimizeaza tot")
 
-            # ---------- Cursor ----------
+            # Cursor 
             # Cand faci pumn cursorul nu se misca
             if not is_fist and not locked:
                 target_x = np.interp(index_tip.x * w, (MARGIN, w - MARGIN), (0, screen_width))
@@ -135,7 +135,7 @@ while cap.isOpened():
             elif is_fist:
                 anchor = None  # pumnul reseteaza numaratoarea
 
-            # ---------- Click (DOAR cand cursorul e blocat) ----------
+            # Click (DOAR cand cursorul e blocat) 
             # distance = np.hypot((index_tip.x - thumb_tip.x) * w, (index_tip.y - thumb_tip.y) * h)
             # pinching = distance < PINCH_DIST
 
